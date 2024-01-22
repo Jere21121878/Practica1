@@ -1,0 +1,95 @@
+<!-- ============================================ -->
+<!--                   Contact                    -->
+<!-- ============================================ -->
+
+<section id="contact-1150">
+    <div class="cs-container">
+        <div class="cs-content">
+            <h2 class="cs-title">Unete a la galeria mundial de tiendas!</h2>
+        </div>
+        <div class="cs-contact-group">
+            <picture class="cs-picture">
+                <!-- Mobile Image -->
+                <source media="(max-width: 600px)" srcset="/assets/LogoRegistro1.jpg">
+                <!-- Tablet and above Image -->
+                <source media="(min-width: 601px)" srcset="/assets/LogoRegistro1.jpg">
+                <img loading="lazy" decoding="async" src="/assets/LogoRegistro1.jpg" alt="people" width="630" height="300">
+              </picture>
+            <p class="cs-contact-text">
+                A lo largo del mundo existen miles de tiendas ofreciendo sus productos unicos y esenciales, la distancia,el idioma y la 
+                moneda han sido barreras que impedian una transaccion exitosa.Ahora, esos productos, estan a un click de distancia.
+            </p>
+            <ul class="cs-ul">
+                <li class="cs-li">
+                    <picture class="cs-icon-wrapper">
+                        <img aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-phone.svg" alt="phone icon" class="cs-icon" width="40" height="40" decoding="async">
+                    </picture>
+                    <div class="cs-flex-group">
+                        <span class="cs-header">Telefono</span>
+                        <a href="tel:888-4565-789
+                        " class="cs-link">+54 9 3518196716
+                        </a>
+                    </div>
+                </li>
+                <li class="cs-li">
+                    <picture class="cs-icon-wrapper">
+                        <img aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-pin.svg" alt="address icon" class="cs-icon" width="40" height="40" decoding="async">
+                    </picture>
+                    <div class="cs-flex-group">
+                        <span class="cs-header">Direccion</span>
+                        <a href="" class="cs-link">Av las malvinas 6000</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--Form-->
+        <form class="cs-form" id="cs-form-1150" name="Contact Form" (ngSubmit)="register()" method="post">
+            <label class="cs-label" >
+                Nombre/s
+                <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.name" name="name" placeholder="Nombre/s">
+              </label>
+            <label class="cs-label">
+                Apellido/s
+                <input class="cs-input" required type="text" id="name-1150"[(ngModel)]="model.apellido" name="name" placeholder="Apellido/s">
+            </label>
+            <label class="cs-label cs-email">
+                Email
+                <input class="cs-input" required type="email" id="email-1150"[(ngModel)]="model.email" name="email" placeholder="Email">
+            </label>
+            <label class="cs-label">
+                Contraseña
+                <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.password"name="name" placeholder="Contraseña">
+            </label>
+            <label class="cs-label">
+                Direccion
+                <input class="cs-input" required type="text" id="name-1150"[(ngModel)]="model.direccion" name="name" placeholder="Direccion">
+            </label>
+            <label class="cs-label">
+                Provincia
+                <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.provincia" name="name" placeholder="Provincia">
+            </label>
+            <label class="cs-label">
+                Localidad
+                <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.localidad"name="name" placeholder="Localidad">
+            </label>
+            <label class="cs-label cs-phone">
+                Celular
+                <input class="cs-input" required type="number" id="phone-1150" [(ngModel)]="model.celular"name="phone" placeholder="Celular">
+            </label>
+            <label class="cs-label">
+                Codigo postal
+                <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.cp"name="name" placeholder="Codigo Postal">
+            </label>
+            <label class="cs-label">
+                Voy a...
+                <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.rol"name="name" placeholder="Elige si quieres vender o comprar">
+            </label>
+            <button class="cs-button-solid cs-submit" type="submit">Registrarse!</button>
+        </form>
+        <!--Bounce Graphic-->
+        <img class="cs-graphic cs-graphic1" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/bounce.svg" alt="bounce" width="208" height="124">
+        <!--Coin Graphic-->
+        <img class="cs-graphic cs-graphic2" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/coin.svg" alt="bounce" width="205" height="161">
+    </div>
+</section>
+                                

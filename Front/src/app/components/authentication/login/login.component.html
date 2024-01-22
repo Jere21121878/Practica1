@@ -1,0 +1,43 @@
+<!-- ============================================ -->
+<!--                   Contact                    -->
+<!-- ============================================ -->
+
+<section id="contact-1150">
+  <div class="cs-container">
+      <div class="cs-content">
+          <h2 class="cs-title">Todo  el mercado mundial al alcanze de un inicio de sesion...</h2>
+      </div>
+      <div class="cs-contact-group">
+          <picture class="cs-picture">
+              <!-- Mobile Image -->
+              <source media="(max-width: 600px)" srcset="/assets/LogoIniciosesion.jpg">
+              <!-- Tablet and above Image -->
+              <source media="(min-width: 601px)" srcset="/assets/LogoIniciosesion.jpg">
+              <img loading="lazy" decoding="async" src="/assets/LogoIniciosesion.jpg" alt="people" width="630" height="300">
+            </picture>
+          <p class="cs-contact-text">
+            Donde sea que usted vea un negocio de éxito, seguramente allí hubo un día, una decisión arrojada - Peter Drucker
+          </p>
+        
+      </div>
+      <!--Form-->
+      <form class="cs-form" id="cs-form-1150" name="Contact Form" (ngSubmit)="login()" method="post">
+        
+          <label class="cs-label cs-email">
+              Email
+              <input class="cs-input" required type="email" id="email-1150"[(ngModel)]="model.email" name="email" placeholder="Email">
+          </label>
+          <label class="cs-label">
+              Contraseña
+              <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.password"name="name" placeholder="Contraseña">
+          </label>
+       
+          <button class="cs-button-solid cs-submit" type="submit">Iniciar sesion!</button>
+      </form>
+      <!--Bounce Graphic-->
+      <img class="cs-graphic cs-graphic1" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/bounce.svg" alt="bounce" width="208" height="124">
+      <!--Coin Graphic-->
+      <img class="cs-graphic cs-graphic2" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/coin.svg" alt="bounce" width="205" height="161">
+  </div>
+</section>
+                              
