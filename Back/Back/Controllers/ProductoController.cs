@@ -3,6 +3,7 @@ using Back.DTO;
 using Back.Models;
 using Back.Repository;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,10 +19,12 @@ namespace Back.Controllers
         private readonly IMapper _mapper;
         private readonly IProductoRepository _productoRepository;
 
-        public ProductoController(IMapper mapper, IProductoRepository productoRepository)
+        public ProductoController(IMapper mapper, IProductoRepository productoRepository, ApplicationDbContext context)
         {
             _mapper = mapper;
             _productoRepository = productoRepository;
+            _context = context;
+
         }
 
         [HttpGet]
@@ -89,21 +92,43 @@ namespace Back.Controllers
             }
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Post(ProductoDTO productoDto)
+        //{
+        //    try
+        //    {
+        //        var producto = _mapper.Map<Producto>(productoDto);
+
+
+
+        //        producto = await _productoRepository.AddPro(producto);
+
+        //        var productoItemDto = _mapper.Map<ProductoDTO>(producto);
+
+        //        return CreatedAtAction("Get", new { Id = productoItemDto.Id }, productoItemDto);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        // ProductoController.cs
         [HttpPost]
-        public async Task<IActionResult> Post(ProductoDTO productoDto)
+        public async Task<IActionResult> Post([FromForm] ProductoDTO productoDto)
         {
             try
             {
                 var producto = _mapper.Map<Producto>(productoDto);
 
-
+                // Aquí puedes manejar la lógica para guardar las imágenes en tu servidor.
+                // Accede a las imágenes a través de productoDto.Imagenes.
 
                 producto = await _productoRepository.AddPro(producto);
 
                 var productoItemDto = _mapper.Map<ProductoDTO>(producto);
 
                 return CreatedAtAction("Get", new { Id = productoItemDto.Id }, productoItemDto);
-
             }
             catch (Exception ex)
             {
@@ -140,6 +165,58 @@ namespace Back.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateProducto(int id, Producto producto)
+        //{
+        //    if (id != producto.Id)
+        //    {
+        //        return BadRequest(); // The provided id in the URL doesn't match the id in the payload.
+        //    }
+
+        //    _context.Entry(producto).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!_context.Locals.Any(e => e.Id == id))
+        //        {
+        //            return NotFound(); // The local entity with the given id doesn't exist.
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent(); // Successfully updated the local entity.
+        //}
+        [HttpGet("local/{localId}")]
+        public async Task<ActionResult<IEnumerable<Producto>>> GetProductossByLocalId(int localId)
+        {
+          
+            var productos = await _context.Productos.Where(a => a.LocalId == localId).ToListAsync();
+
+            if (productos == null || productos.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return productos;
+        }
+        // ProductoController.cs
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Producto>>> SearchProductos([FromQuery] string searchTerm)
+        {
+            var productos = await _context.Productos
+                .Where(p => EF.Functions.Like(p.NombrePro, $"%{searchTerm}%") || EF.Functions.Like(p.CategoriaP, $"%{searchTerm}%"))
+                .ToListAsync();
+
+            return productos;
+        }
+
 
     }
 }

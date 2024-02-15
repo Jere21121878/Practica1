@@ -11,10 +11,9 @@ namespace Back.Models
         public string DireccionLo { get; set; }
         public string Horario { get; set; }
         public string Telefono { get; set; }
-        [ForeignKey("VendedorId")]
-        public Vendedor Vendedor { get; set; }
 
-        public ICollection<Compra> Compras { get; set; }
+        public string VendedorId { get; set; }
+        //public ICollection<Compra>? Compras { get; set; }
 
 
 

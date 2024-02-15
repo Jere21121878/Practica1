@@ -1,13 +1,6 @@
 
 
-.container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(255, 0, 106);
-  }
+
                                 /*-- -------------------------- -->
 <---          Gallery           -->
 <--- -------------------------- -*/
@@ -19,7 +12,11 @@
       position: relative;
       /* Prevents overflow from the image going off screen */
       overflow: hidden;
-      background-image: url("/assets/star2.jpg");
+background-color: rgb(169, 24, 24);
+      background-position: center;
+background-repeat: repeat;
+background-size: contain;
+
 
   }
   #gallery-43 .cs-container {
@@ -84,11 +81,13 @@
       position: relative;
   }
   #gallery-43 .cs-title {
-  font-family: 'Beautiful Barbies Normal';
-  font-size: xx-large;
+  font-size: 4em;
   font-style:italic;
-  background-color: antiquewhite;
-  color: #e01071;
+  background-color: #000000;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: auto;
+  color:rgb(255, 0, 0);
 }
   #gallery-43 .cs-picture img {
       position: absolute;
@@ -193,7 +192,16 @@
       grid-column: span 4;
   }
 }
+#gallery-43 .cs-image-overlay img {
+    max-width: 100%; /* Limita el ancho de la imagen al 100% del contenedor */
+    height:25em; /* Ajusta la altura proporcionalmente al ancho */
+    display: block; /* Elimina el espacio adicional debajo de la imagen */
+    margin: auto; /* Centra la imagen dentro de su contenedor */
+    filter: drop-shadow(-1px 1px 30px violet) ;
+    box-shadow: -5px 5px 300px #ffffff;
 
+    
+  }
         /*-- -------------------------- -->
 <---           Hero             -->
 <--- -------------------------- -*/
@@ -299,6 +307,14 @@
       color: burlywood;
       margin-bottom: 1rem;
       display: block;
+    
+  }
+  @font-face {
+    font-family: 'Newspaper';
+    src: url('/assets/fonts/Newspaper.ttf');
+}
+.custom-font {
+    font-family: 'Newspaper'; 
   }
   #hero-229 .cs-title {
       /* 39px - 61px */
@@ -337,7 +353,7 @@
       margin: 0 0 1rem 0;
       color: #e66262;
       padding: 0;
-      background-color: var(--primary);
+      background-color: black;
       display: inline-block;
       position: relative;
       z-index: 1;
@@ -370,7 +386,7 @@
       margin: 0;
       color: #e66262;
       padding: 0;
-      background-color: transparent;
+      background-color: black;
       border: 1px solid var(--bodyTextColorWhite);
       box-sizing: border-box;
       display: inline-flex;

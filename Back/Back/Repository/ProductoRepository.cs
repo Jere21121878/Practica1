@@ -44,9 +44,11 @@ namespace Back.Repository
                 proItem.NombrePro = producto.NombrePro;
                 proItem.DescripcionPro = producto.DescripcionPro;
                 proItem.Precio = producto.Precio;
-                proItem.Imagen = producto.Imagen;
                 proItem.CantidadPro = producto.CantidadPro;
-               
+                proItem.CategoriaP = producto.CategoriaP;
+                proItem.Pregunta = producto.Pregunta;
+
+
 
                 await _context.SaveChangesAsync();
             }

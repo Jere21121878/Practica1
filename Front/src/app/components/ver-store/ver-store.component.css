@@ -1,0 +1,17 @@
+/* ver-store.component.css */
+.sidebar {
+    width: 8rem;
+    box-shadow: 2px 0 12px hsla(270, 30%, 10%, .2);
+    transition: width 0.3s ease; /* Agrega una transición para suavizar el cambio de ancho */
+  }
+  
+  .show-sidebar .sidebar {
+    width: 8rem; /* Ajusta el ancho deseado cuando se muestra */
+  }
+  
+  .sidebar {
+    width: 8rem;
+    box-shadow: 2px 0 12px hsla(270, 30%, 10%, .2);
+    transition: width 0.3s ease; /* Agrega una transición para suavizar el cambio de ancho */
+  }
+  

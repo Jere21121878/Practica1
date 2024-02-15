@@ -1,0 +1,18 @@
+.search {
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.edit {
+    color: rgb(6, 137, 54);
+    cursor: pointer;
+}
+
+.delete {
+    color: rgb(251, 0, 0);
+    cursor: pointer;
+}
+
+.agregar {
+    margin-bottom: 10px;
+}

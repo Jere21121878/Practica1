@@ -1,0 +1,41 @@
+<div class="dash">
+  <!-- HEADER -->
+  <header class="header">
+    <!-- Puedes agregar contenido específico del header aquí -->
+  </header>
+
+  <!-- BODY -->
+  <div class="body"[ngClass]=>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar__icon"></div>
+      <div class="sidebar__icon" ></div>
+      <div class="sidebar__icon" ></div>
+      <div class="sidebar__icon"  ></div>
+      <div class="sidebar__icon" ></div>
+    </div>
+
+    <!-- Main content of VerStoreComponent goes here -->
+    <div class="margen">
+      <mat-tab-group class="centered-tab-group" fitInkBarToContent>
+        <mat-tab label="Perfil">
+          <!-- Contenido de la pestaña Perfil -->
+        </mat-tab>
+        <mat-tab label="Lista de productos">
+          <app-list-productos></app-list-productos>
+          <mat-tab-group class="centered-tab-group" fitInkBarToContent>
+            <!-- Otros componentes de la pestaña Lista de productos -->
+          </mat-tab-group>
+        </mat-tab>
+        <mat-tab label="Contabilidad">
+          <div class="margen">
+            <!-- Contenido de la pestaña Contabilidad -->
+          </div>
+        </mat-tab>
+        <mat-tab label="Reviews">
+          <!-- Contenido de la pestaña Reviews -->
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

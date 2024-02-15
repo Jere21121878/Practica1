@@ -1,0 +1,38 @@
+<body>
+  <div class="dash">
+    <app-navbar></app-navbar>
+
+    <div class="main-and-sidebar">
+      <!-- BODY -->
+      <main class="main">
+        <app-ver-producto [id]="Id"></app-ver-producto>
+      </main>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <!-- Lista desplegable -->
+        <div class="dropdown">
+          <button class="dropbtn">Cantidad</button>
+          <div class="dropdown-content">
+            <ul class="number-list">
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- Botones adicionales -->
+        <div class="button-container">
+          <button mat-raised-button color="accent">Comprar</button>
+          <button mat-stroked-button color="accent">Agregar al carrito</button>
+        </div>
+        <div *ngIf="localNombre">
+          Vendido por la tienda: {{ localNombre }}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

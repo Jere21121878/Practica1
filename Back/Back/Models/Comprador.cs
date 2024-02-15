@@ -6,7 +6,7 @@
         public string Nombre { get; set; }
 
         public ICollection<Compra> Compras { get; set; }
-        public ICollection<ApplicationUser> Usuarios { get; set; } // Relación con usuarios
+        //public ICollection<ApplicationUser> Usuarios { get; set; } // Relación con usuarios
 
     }
 }

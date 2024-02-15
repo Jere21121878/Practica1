@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap');
+
+
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  place-content: center;
+  color: hsl(260, 100%, 99%);
+  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+button:hover,
+button:focus {
+  outline: none;
+}
+
+a,
+a:hover,
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+.dash {
+  background: hsl(260, 100%, 99%);
+  display: flex;
+  flex-direction: column;
+
+}
+
+.dash * {
+  transition: all .1s;
+}
+
+
+
+
+.body {
+  flex-grow: 2;
+  display: flex;
+}
+
+.sidebar {
+  width: 8rem;
+  background-color: rgb(260, 100%, 99%);
+}
+
+
+
+
+
+.main {
+  flex-grow: 2;
+background-color: aliceblue;
+  padding: 4rem 0 0 8rem;
+  display: flex;
+  border-bottom-right-radius: 8px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+}
+
+.main__col-1 {
+  width: 30%;
+}
+
+
+
+
+
+
+.example-card {
+  max-width: 400px;
+  margin: 15px;
+  box-sizing: border-box;
+}
+
+.example-header-image {
+  background-image: url('/assets/cat.jpg'); /* Puedes establecer una imagen por defecto para los productos */
+  background-size: cover;
+  height: 100px; /* Ajusta la altura según tus necesidades */
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  border-radius: 50%;
+}
+.example-card .example-header-image .TitlePro,
+.example-card mat-card-title .TitlePro {
+  color: #000; /* Cambia a color negro (#000) */
+}

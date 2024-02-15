@@ -1,0 +1,82 @@
+.dash {
+    display: flex; /* Hacer que los elementos hijos se comporten como flexbox */
+    flex-direction: column; /* Apilar los elementos verticalmente */
+  }
+  
+  .main-and-sidebar {
+    display: flex; /* Hacer que los elementos hijos se comporten como flexbox */
+    flex: 1; /* El cuerpo y el sidebar compartirán el espacio restante */
+  }
+  
+  .sidebar {
+    order: 2;
+    flex: 0 0 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .number-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .number-list li {
+    margin-bottom: 10px;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Apilar los elementos verticalmente */
+  }
+  
+  .button-container button {
+    margin-bottom: 10px; /* Espaciado entre los botones */
+  }
+  
+  .main {
+    order: 1; /* Colocar el cuerpo antes del sidebar */
+    flex: 1;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }

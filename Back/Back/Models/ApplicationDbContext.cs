@@ -16,6 +16,8 @@ namespace Back.Models
         public DbSet<DetalleCompra> DetalleCompras { get; set; }
         public DbSet<Local> Locals { get; set; }
         public DbSet<Producto> Productos { get; set; }
+        public DbSet<Foto> Fotos { get; set; }
+
         public DbSet<LocalCompra> LocalCompras { get; set; }
 
 

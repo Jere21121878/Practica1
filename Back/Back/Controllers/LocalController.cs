@@ -4,6 +4,7 @@ using Back.Models;
 using Back.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Back.Controllers
 {
@@ -17,10 +18,12 @@ namespace Back.Controllers
         private readonly IMapper _mapper;
         private readonly ILocalRepository _localRepository;
 
-        public LocalController(IMapper mapper, ILocalRepository localRepository)
+        public LocalController(IMapper mapper, ILocalRepository localRepository, ApplicationDbContext context)
         {
             _mapper = mapper;
             _localRepository = localRepository;
+            _context = context;
+
         }
 
         [HttpGet]
@@ -88,21 +91,51 @@ namespace Back.Controllers
             }
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Post(LocalDTO localDto)
+        //{
+        //    try
+        //    {
+        //        var local = _mapper.Map<Local>(localDto);
+
+
+
+        //        local = await _localRepository.AddLoc(local);
+
+        //        var localItemDto = _mapper.Map<LocalDTO>(local);
+
+        //        return CreatedAtAction("Get", new { Id = localItemDto.Id }, localItemDto);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
         [HttpPost]
-        public async Task<IActionResult> Post(LocalDTO localDto)
+        public async Task<ActionResult<Local>> CreateLocal([FromForm] Local local, List<IFormFile> files)
         {
             try
             {
-                var local = _mapper.Map<Local>(localDto);
+                _context.Locals.Add(local);
+                await _context.SaveChangesAsync(); // Guardar el local primero
 
-
-
-                local = await _localRepository.AddLoc(local);
-
-                var localItemDto = _mapper.Map<LocalDTO>(local);
-
-                return CreatedAtAction("Get", new { Id = localItemDto.Id }, localItemDto);
-
+                foreach (var file in files)
+                {
+                    using (var stream = new System.IO.MemoryStream())
+                    {
+                        await file.CopyToAsync(stream);
+                        var foto = new Foto
+                        {
+                            NombreFo = file.FileName,
+                            Data = stream.ToArray(),
+                            LocalId = local.Id.ToString() // Asignar el LocalId después de guardar el local
+                        };
+                        _context.Fotos.Add(foto);
+                    }
+                }
+                await _context.SaveChangesAsync(); // Guardar las fotos
+                return CreatedAtAction(nameof(Get), new { id = local.Id }, local);
             }
             catch (Exception ex)
             {
@@ -139,6 +172,21 @@ namespace Back.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("vendedor/{vendedorId}")]
+        public async Task<ActionResult<IEnumerable<Local>>> GetLocalsByVendedorId(string vendedorId)
+        {
+            if (string.IsNullOrEmpty(vendedorId))
+            {
+                return BadRequest("El parámetro 'vendedorId' es inválido.");
+            }
+            var locals = await _context.Locals.Where(a => a.VendedorId == vendedorId).ToListAsync();
 
+            if (locals == null || locals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return locals;
+        }
     }
 }

@@ -12,10 +12,11 @@ namespace Back.DTO
         public string DireccionLo { get; set; }
         public string Horario { get; set; }
         public string Telefono { get; set; }
-        [ForeignKey("VendedorId")]
-        public VendedorDTO Vendedor { get; set; }
+       
 
-        public ICollection<Compra> Compras { get; set; }
+        public string VendedorId { get; set; }
+
+        //public ICollection<Compra>? Compras { get; set; }
 
 
 

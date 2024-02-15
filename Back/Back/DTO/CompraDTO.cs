@@ -12,7 +12,7 @@ namespace Back.DTO
         [ForeignKey("CompradorId")]
         public CompradorDTO Comprador { get; set; }
 
-        public ICollection<Local> Locals { get; set; }
+        //public ICollection<Local> Locals { get; set; }
 
 
     }

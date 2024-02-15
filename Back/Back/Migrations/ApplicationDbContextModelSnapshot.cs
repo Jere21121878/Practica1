@@ -212,6 +212,33 @@ namespace Back.Migrations
                     b.ToTable("DetalleCompras");
                 });
 
+            modelBuilder.Entity("Back.Models.Foto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("LocalId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreFo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductoId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fotos");
+                });
+
             modelBuilder.Entity("Back.Models.Local", b =>
                 {
                     b.Property<int>("Id")
@@ -244,12 +271,11 @@ namespace Back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VendedorId")
-                        .HasColumnType("int");
+                    b.Property<string>("VendedorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("VendedorId");
 
                     b.ToTable("Locals");
                 });
@@ -289,14 +315,14 @@ namespace Back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoriaId")
+                    b.Property<int?>("CategoriaId")
                         .HasColumnType("int");
 
-                    b.Property<string>("DescripcionPro")
+                    b.Property<string>("CategoriaP")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Imagen")
+                    b.Property<string>("DescripcionPro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -311,11 +337,13 @@ namespace Back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Pregunta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
-
-                    b.HasIndex("LocalId");
 
                     b.ToTable("Productos");
                 });
@@ -328,28 +356,9 @@ namespace Back.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Vendedor");
-                });
-
-            modelBuilder.Entity("CompraLocal", b =>
-                {
-                    b.Property<int>("ComprasId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LocalsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ComprasId", "LocalsId");
-
-                    b.HasIndex("LocalsId");
-
-                    b.ToTable("CompraLocal");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -381,15 +390,15 @@ namespace Back.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ae39940d-2215-4faf-81fa-9731ca635f0c",
-                            ConcurrencyStamp = "a33da37b-e23b-4106-b68e-500d480134b1",
+                            Id = "10353f84-6cfb-4bba-a9be-8d321b62e650",
+                            ConcurrencyStamp = "45408d11-4087-4310-b149-40ce66bf1df7",
                             Name = "Vendedor",
                             NormalizedName = "VENDEDOR"
                         },
                         new
                         {
-                            Id = "67d6046e-f075-4ca9-bd19-218d4a16a925",
-                            ConcurrencyStamp = "80044a08-2256-4a26-8732-ccffd409e056",
+                            Id = "385527a3-cc5d-44b1-b7a2-3ed5bfea40e5",
+                            ConcurrencyStamp = "0c4f887e-8bd4-4b3b-8fcd-756467098cb6",
                             Name = "Comprador",
                             NormalizedName = "COMPRADOR"
                         });
@@ -504,11 +513,11 @@ namespace Back.Migrations
             modelBuilder.Entity("Back.Models.ApplicationUser", b =>
                 {
                     b.HasOne("Back.Models.Comprador", "Comprador")
-                        .WithMany("Usuarios")
+                        .WithMany()
                         .HasForeignKey("CompradorId");
 
                     b.HasOne("Back.Models.Vendedor", "Vendedor")
-                        .WithMany("Usuarios")
+                        .WithMany()
                         .HasForeignKey("VendedorId");
 
                     b.Navigation("Comprador");
@@ -546,17 +555,6 @@ namespace Back.Migrations
                     b.Navigation("Producto");
                 });
 
-            modelBuilder.Entity("Back.Models.Local", b =>
-                {
-                    b.HasOne("Back.Models.Vendedor", "Vendedor")
-                        .WithMany("Locals")
-                        .HasForeignKey("VendedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vendedor");
-                });
-
             modelBuilder.Entity("Back.Models.LocalCompra", b =>
                 {
                     b.HasOne("Back.Models.Compra", "Compra")
@@ -578,36 +576,9 @@ namespace Back.Migrations
 
             modelBuilder.Entity("Back.Models.Producto", b =>
                 {
-                    b.HasOne("Back.Models.Categoria", "Categoria")
+                    b.HasOne("Back.Models.Categoria", null)
                         .WithMany("Productos")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Back.Models.Local", "Local")
-                        .WithMany()
-                        .HasForeignKey("LocalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categoria");
-
-                    b.Navigation("Local");
-                });
-
-            modelBuilder.Entity("CompraLocal", b =>
-                {
-                    b.HasOne("Back.Models.Compra", null)
-                        .WithMany()
-                        .HasForeignKey("ComprasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Back.Models.Local", null)
-                        .WithMany()
-                        .HasForeignKey("LocalsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriaId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -669,15 +640,6 @@ namespace Back.Migrations
             modelBuilder.Entity("Back.Models.Comprador", b =>
                 {
                     b.Navigation("Compras");
-
-                    b.Navigation("Usuarios");
-                });
-
-            modelBuilder.Entity("Back.Models.Vendedor", b =>
-                {
-                    b.Navigation("Locals");
-
-                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

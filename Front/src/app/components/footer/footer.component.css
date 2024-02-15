@@ -9,7 +9,8 @@
         padding: clamp(2.5rem, 7.9vw, 6.25rem) 1rem;
         /* 40px - 50px */
         padding-bottom: clamp(2.5rem, 7.9vw, 3.125rem);
-        background-color: rgb(255, 247, 165);
+        background: #9b0e0e;
+        
     }
     #cs-footer-108 .cs-container {
         width: 100%;
@@ -20,7 +21,7 @@
         /* 40px - 60px*/
         padding: 0 0 clamp(2.5rem, 4.7vw, 3.75rem);
         margin: auto;
-        border-bottom: 1px solid #ce6969;
+        border-bottom: 1px solid #e5d200;
     }
     #cs-footer-108 .cs-li {
         list-style: none;
@@ -36,8 +37,9 @@
         line-height: 1.5em;
         text-decoration: none;
         font-weight: 700;
-        color: rgb(219, 86, 108);
+        color: rgb(253, 253, 253);
         position: relative;
+
     }
     #cs-footer-108 .cs-link:hover:before {
         width: 100%;
@@ -59,7 +61,7 @@
         /* 14px - 16px */
         font-size: clamp(0.875rem, 1.6vw, 1rem);
         text-align: center;
-        color: #182de2;
+        color: #ffffff;
         display: block;
         /* 20px - 28px */
         margin: clamp(1.25rem, 2.8vw, 1.75rem) auto 0;

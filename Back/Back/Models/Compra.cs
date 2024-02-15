@@ -13,7 +13,7 @@ namespace Back.Models
 
         public Comprador Comprador { get; set; }
 
-        public ICollection<Local> Locals { get; set; }
+        //public ICollection<Local> Locals { get; set; }
 
 
 

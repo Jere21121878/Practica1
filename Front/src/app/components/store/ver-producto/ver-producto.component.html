@@ -1,0 +1,19 @@
+
+<!-- <div *ngIf="mascota$ | async as mascota" class="container"> -->
+<app-spinner *ngIf="loading"></app-spinner>
+<div *ngIf="producto!= null" class="container">
+    <mat-card class="card">
+        <mat-card-title>{{producto.nombrePro}}</mat-card-title>
+        <mat-card-content>
+            
+            <p><strong>precio:</strong >{{ producto.precio }} </p>
+            <p><strong>descripcion:</strong >{{ producto.descripcionPro }} </p>
+            <p><strong>categoria:</strong>{{ producto.categoriaP }}</p>
+            <p><strong>cantidad:</strong>{{ producto.cantidadPro }}  </p>
+        </mat-card-content>
+        
+        <mat-card-actions>
+            <button routerLink="/listAts/:Id" mat-raised-button>Volver</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

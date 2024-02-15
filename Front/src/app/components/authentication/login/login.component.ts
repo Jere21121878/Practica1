@@ -13,24 +13,23 @@ export class LoginComponent {
     email: '',
     password: ''
   };
-  constructor(private authService: AuthenticationService, private router: Router) { }
+
+  constructor(private authService: AuthenticationService, private router: Router) {}
 
   login() {
-    this.authService.login(this.model)
-      .subscribe(
-        response => {
-          console.log(response);
-          if (response.role === 'Vendedor') {
-            this.router.navigate(['vend', response.userId]); 
-          } else {
-            if (response.role === 'Comprador') {
-              this.router.navigate(['comp', response.userId]);
-          } 
-          }
-        },
-        error => {
-          console.log(error);
+    this.authService.login(this.model).subscribe(
+      response => {
+        console.log(response);
+        if (response.role === 'Vendedor') {
+          this.authService.vendedorId = response.userId;
+          this.router.navigate(['vend', response.userId]);
+        } else if (response.role === 'Comprador') {
+          this.router.navigate(['comp', response.userId]);
         }
-      );
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
