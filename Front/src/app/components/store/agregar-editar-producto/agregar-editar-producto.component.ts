@@ -26,7 +26,7 @@ export class AgregarEditarProductoComponent implements OnInit{
       precio: ['', Validators.required],
       descripcionPro: ['', Validators.required],
       categoriaP: ['', Validators.required],
-      imagen: ['', Validators.required],
+      foto: ['', Validators.required],
       cantidadPro: ['', Validators.required],
 
   })
@@ -55,9 +55,11 @@ export class AgregarEditarProductoComponent implements OnInit{
         descripcionPro: data.descripcionPro,
         categoriaP: data.categoriaP,
         cantidadPro: data.cantidadPro,
-        imagen: data.imagen,
-        precio: data.precio,
-        localid: data.precio,
+        foto: data.foto,
+        precioComprado: data.precioComprado,
+        precioVendido: data.precioVendido,
+
+        localid: data.precioComprado,
 
 
 
@@ -77,8 +79,10 @@ export class AgregarEditarProductoComponent implements OnInit{
           descripcionPro: this.form.value.descripcionPro,
           categoriaP: this.form.value.categoriaP,
           cantidadPro: this.form.value.cantidadPro,
-          imagen: this.form.value.imagen,
-          precio: this.form.value.precio,
+          foto: this.form.value.foto,
+          precioVendido: this.form.value.precioVendido,
+          precioComprado: this.form.value.precioComprado,
+
         }
       
         if (this.Id != 0) {

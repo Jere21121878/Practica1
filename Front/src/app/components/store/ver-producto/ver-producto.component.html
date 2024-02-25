@@ -1,19 +1,25 @@
-
-<!-- <div *ngIf="mascota$ | async as mascota" class="container"> -->
-<app-spinner *ngIf="loading"></app-spinner>
 <div *ngIf="producto!= null" class="container">
-    <mat-card class="card">
-        <mat-card-title>{{producto.nombrePro}}</mat-card-title>
-        <mat-card-content>
-            
-            <p><strong>precio:</strong >{{ producto.precio }} </p>
-            <p><strong>descripcion:</strong >{{ producto.descripcionPro }} </p>
-            <p><strong>categoria:</strong>{{ producto.categoriaP }}</p>
-            <p><strong>cantidad:</strong>{{ producto.cantidadPro }}  </p>
-        </mat-card-content>
-        
-        <mat-card-actions>
-            <button routerLink="/listAts/:Id" mat-raised-button>Volver</button>
-        </mat-card-actions>
-    </mat-card>
+    <app-spinner *ngIf="loading"></app-spinner>
+    <div class="product-info">
+        <div class="product-image">
+            <!-- Aquí mostramos la foto del producto -->
+            <div class="image-container">
+                <img *ngIf="foto" [src]="foto" alt="Foto del producto">
+            </div>
+        </div>
+        <div class="product-details">
+            <mat-card class="card">
+                <mat-card-title>{{producto.nombrePro}}</mat-card-title>
+                <mat-card-content>
+                    <p><strong>Precio:</strong> {{ producto.precioVendido }}</p>
+                    <p><strong>Descripción:</strong> {{ producto.descripcionPro }}</p>
+                    <p><strong>Categoría:</strong> {{ producto.categoriaP }}</p>
+                    <p><strong>Cantidad:</strong> {{ producto.cantidadPro }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button routerLink="//:Id" mat-raised-button>Volver</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
 </div>

@@ -42,13 +42,17 @@ namespace Back.Repository
             if (detalleCompraItem != null)
             {
                 detalleCompraItem.Cantidad = detalleCompra.Cantidad;
-                detalleCompraItem.PrecioXUnidad = detalleCompra.PrecioXUnidad;
 
 
 
                 await _context.SaveChangesAsync();
             }
 
+        }
+        public async Task<int> GetCantidadDetalleCompraPorUsuario(string userId)
+        {
+            return await _context.DetalleCompras
+                .CountAsync(dc => dc.CompradorId == userId);
         }
     }
 }

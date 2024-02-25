@@ -5,6 +5,8 @@ export interface Producto {
     localId:number,
     categoriaP: string;
     cantidadPro: string;
-    precio: string;
-    imagen: string;
+    precioVendido: number;
+    precioComprado: number;
+
+    foto: string;
 }

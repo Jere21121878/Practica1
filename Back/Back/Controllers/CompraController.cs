@@ -2,8 +2,12 @@
 using Back.DTO;
 using Back.Models;
 using Back.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Back.Controllers
 {
@@ -16,11 +20,17 @@ namespace Back.Controllers
 
         private readonly IMapper _mapper;
         private readonly ICompraRepository _compraRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<CompraController> _logger;
 
-        public CompraController(IMapper mapper, ICompraRepository compraRepository)
+        public CompraController(ApplicationDbContext context, IMapper mapper, ICompraRepository compraRepository, UserManager<ApplicationUser> userManager, ILogger<CompraController> logger)
         {
+            _context = context;
+
             _mapper = mapper;
             _compraRepository = compraRepository;
+            _userManager = userManager;
+            _logger = logger; // Asegúrate de tener este campo en tu clase
         }
 
         [HttpGet]
@@ -54,17 +64,21 @@ namespace Back.Controllers
                     return NotFound();
                 }
 
+                // Cargar los detalles de compra asociados a esta compra
+                await _context.Entry(compra)
+                    .Collection(c => c.Detalles)
+                    .LoadAsync();
+
                 var compraDto = _mapper.Map<CompraDTO>(compra);
 
                 return Ok(compraDto);
-
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
+
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(int Id)
@@ -87,28 +101,71 @@ namespace Back.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post(CompraDTO compraDto)
+        [HttpPost("compra")]
+        public async Task<IActionResult> Compra([FromBody] CompraDTO modelo)
         {
             try
             {
-                var compra = _mapper.Map<Compra>(compraDto);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid payload");
+                }
 
+                var userId = modelo.CompradorId;
 
+                var user = await _userManager.FindByIdAsync(userId);
 
-                compra = await _compraRepository.AddCom(compra);
+                if (user == null)
+                {
+                    return BadRequest("User not found");
+                }
 
-                var compraItemDto = _mapper.Map<CompraDTO>(compra);
+                // Crear la compra sin asignar los detalles
+                var compra = new Compra
+                {
+                    Total = modelo.Total,
+                    Fecha = DateTime.Now,
+                    CompradorId = userId,
+                    LocalId = modelo.LocalId,
+                    Detalles = new List<DetalleCompra>() // Inicializar la lista de detalles
+                };
 
-                return CreatedAtAction("Get", new { Id = compraItemDto.Id }, compraItemDto);
+                // Buscar los detalles de compra existentes y asociarlos a la compra
+                foreach (var detalleDto in modelo.Detalles)
+                {
+                    var detalleCompra = await _context.DetalleCompras.FirstOrDefaultAsync(d => d.Id == detalleDto.Id);
 
+                    if (detalleCompra != null)
+                    {
+                        // Asignar el detalle existente a la compra
+                        compra.Detalles.Add(detalleCompra);
+                    }
+                    else
+                    {
+                        // Manejar el caso en que el detalle no se encuentre
+                        // Esto podría ser un error en la solicitud del cliente
+                        return BadRequest($"Detalle de compra con ID {detalleDto.Id} no encontrado");
+                    }
+                }
+
+                _context.Compras.Add(compra);
+                await _context.SaveChangesAsync();
+
+                return Ok("Compra realizada con éxito");
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(ex, "An error occurred while processing the purchase");
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing the purchase: " + ex.ToString());
             }
         }
+
+
+
+
+
+
 
         [HttpPut("{Id}")]
         public async Task<IActionResult> Put(int Id, CompraDTO compraDto)
@@ -138,6 +195,44 @@ namespace Back.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpPost("agregar-al-carrito")]
+        public async Task<IActionResult> AgregarAlCarrito([FromBody] List<DetalleCompraDTO> detallesCompraDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid payload");
+                }
+
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                foreach (var detalleCompraDto in detallesCompraDto)
+                {
+                    // Crear el detalle de compra a partir del DTO recibido
+                    var detalleCompra = new DetalleCompra
+                    {
+                        ProductoId = detalleCompraDto.ProductoId,
+                        Cantidad = detalleCompraDto.Cantidad,
+                        PrecioUnitario = detalleCompraDto.PrecioUnitario,
+                        Subtotal = detalleCompraDto.Subtotal,
+                        LocalId = detalleCompraDto.LocalId,
+                    };
+
+                    // Guardar el detalle de compra en la base de datos
+                    _context.DetalleCompras.Add(detalleCompra);
+                    await _context.SaveChangesAsync();
+                }
+
+                return Ok("Productos agregados al carrito exitosamente");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while processing the purchase: " + ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing the purchase: " + ex.Message);
+            }
+
         }
     }
 }

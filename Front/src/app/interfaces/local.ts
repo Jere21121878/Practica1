@@ -7,5 +7,6 @@ export interface Local {
     categoria: string;
     horario: string;
     telefono: string;
-    imagenFondoUrl: string | null; // Cambiado a string | null
+    foto: string; // Agrega este campo para la URL de la imagen
+
 }

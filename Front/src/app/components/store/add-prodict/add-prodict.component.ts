@@ -25,8 +25,8 @@ export class AddProdictComponent implements OnInit{
       nombrePro: ['', Validators.required],
       descripcionPro: ['', Validators.required],
       categoriaP: ['', Validators.required],
-      imagen: ['', Validators.required],
-      precio: ['', Validators.required],
+      foto: ['', Validators.required],
+      precioVendido: ['', Validators.required],
       cantidadPro: ['', Validators.required],
     });
 // Asignar localid solo si storeId está presente y no es nulo
@@ -56,8 +56,10 @@ if (storeIdParam) {
       descripcionPro: this.form.value.descripcionPro,
       categoriaP: this.form.value.categoriaP,
       cantidadPro: this.form.value.cantidadPro,
-      precio: this.form.value.precio,
-      imagen: this.form.value.imagen,
+      precioVendido: this.form.value.precioVendido,
+      precioComprado: this.form.value.precioComprado,
+
+      foto: this.form.value.foto,
       localId: this.localId,
     };
 
@@ -88,6 +90,8 @@ export interface Producto {
     descripcionPro: string;
     localId:number,
     cantidadPro: string;
-    precio: string;
-    imagen: string;
+    precioVendido: number;
+    precioComprado: number;
+
+    foto: string;
 }

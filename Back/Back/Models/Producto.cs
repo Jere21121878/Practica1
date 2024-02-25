@@ -8,10 +8,9 @@ namespace Back.Models
         public string NombrePro { get; set; }
 
         public string DescripcionPro { get; set; }
-        public string Precio { get; set; }
-
-        public string CantidadPro { get; set; }
-        public string Pregunta { get; set; }
+        public float PrecioVendido { get; set; }
+        public float PrecioComprado { get; set; }
+        public int CantidadPro { get; set; }
 
         public int LocalId { get; set; }
 

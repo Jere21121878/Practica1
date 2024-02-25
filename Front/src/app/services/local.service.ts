@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Local } from '../interfaces/local';
 import { environment } from 'src/enviroments/environment';
+import { Foto } from '../interfaces/foto';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,8 @@ export class LocalService {
     return this.http.get<Local[]>(`${this.myAppUrl}${this.myApiUrl}vendedor/${vendedorId}`);
   }
 
-  obtenerImagenFondo(localId: number): Observable<string> {
-    // Cambia la URL de acuerdo a tu endpoint en el backend para obtener la imagen de fondo
-    return this.http.get<string>(`${this.myAppUrl}${this.myApiUrl}${localId}/imagen-fondo`);
+  getLocalFoto(localId: string): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}${localId}/foto`);
   }
+  
 }

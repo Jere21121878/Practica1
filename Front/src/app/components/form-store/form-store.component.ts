@@ -58,7 +58,7 @@ export class FormStoreComponent implements OnInit {
         categoria: data.categoria,
         horario: data.horario,
         telefono: data.telefono,
-        imagenFondoUrl:data.imagenFondoUrl
+        imagenFondoUrl:data.foto
       });
       this.loading = false;
     });
@@ -74,7 +74,7 @@ export class FormStoreComponent implements OnInit {
         telefono: this.form.value.telefono,
         categoria: this.form.value.categoria,
         vendedorid: this.vendedorId,
-        imagenFondoUrl: this.form.value.imagenFondoUrl, // Acceder al valor desde el formulario
+        foto: this.form.value.foto, // Acceder al valor desde el formulario
       };
   
       if (this.Id != 0) {
@@ -123,6 +123,6 @@ export interface Local {
     categoria: string;
     horario: string;
     telefono: string;
-    imagenFondoUrl: string | null; // Cambiado a string | null
+    foto:string;
 
 }

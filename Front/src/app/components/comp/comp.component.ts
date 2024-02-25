@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./comp.component.css']
 })
 export class CompComponent {
-
+  
 }

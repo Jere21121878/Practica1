@@ -19,7 +19,20 @@
     <div class="margen">
       <mat-tab-group class="centered-tab-group" fitInkBarToContent>
         <mat-tab label="Perfil">
-          <!-- Contenido de la pestaña Perfil -->
+          <div class="perfil-container" *ngIf="local ">
+            <div class="perfil-header">
+              <app-foto [foto]="foto"></app-foto>
+            </div>
+            <div class="perfil-body">
+              <h2>{{ local.nombreLo }}</h2>
+              <p>{{ local.descripcionLo }}</p>
+              <p>Categoría: {{ local.categoria }}</p>
+              <p>Dirección: {{ local.direccionLo }}</p>
+              <p>Horario: {{ local.horario }}</p>
+              <p>Teléfono: {{ local.telefono }}</p>
+            </div>
+          </div>
+
         </mat-tab>
         <mat-tab label="Lista de productos">
           <app-list-productos></app-list-productos>

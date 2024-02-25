@@ -59,15 +59,21 @@ namespace Back.Controllers
 
                 var localDto = _mapper.Map<LocalDTO>(local);
 
-                return Ok(localDto);
+                // Obtener la imagen asociada al local y asignarla al DTO
+                var foto = await _context.Fotos.FirstOrDefaultAsync(f => f.LocalId == Id.ToString());
+                if (foto != null)
+                {
+                    localDto.Foto = _mapper.Map<FotoDTO>(foto);
+                }
 
+                return Ok(localDto);
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
+
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(int Id)

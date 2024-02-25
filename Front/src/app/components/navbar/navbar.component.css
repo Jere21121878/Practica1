@@ -18,13 +18,13 @@ header {
   max-width: 75px;
   float: left;
   padding: 14px 0px;
-  border-radius: 50%; /* Agrega esta línea para hacer el logo circular */
-  overflow: hidden; /* Asegura que la imagen no sobresalga del círculo */
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .brand-logo img {
   max-width: 100%;
-  border-radius: 50%; /* Añade esto para asegurarte de que la imagen también sea circular */
+  border-radius: 50%;
 }
 
 .navigation {
@@ -35,6 +35,7 @@ header {
 .navigation li {
   list-style: none;
   float: left;
+  margin-right: 10px;
 }
 
 .navigation li a {
@@ -100,7 +101,8 @@ header {
   }
 
   .navigation li {
-      width: 100%;
+      list-style: none;
+      float: left;
   }
 
   .navigation li a {
@@ -124,12 +126,36 @@ header {
   }
 }
 
+.button-container {
+  float: right;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.button-container button {
+  margin-left: 10px;
+}
+
+.login-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.login-btn i {
+  margin-right: 5px;
+}
+
 .search-bar {
   float: left;
   display: flex;
   align-items: flex-end;
   margin-right: 20px;
-  margin-left: auto; /* Centra la barra de búsqueda entre el logo y los botones */
+  margin-left: auto;
 }
 
 .search-bar input {
@@ -138,8 +164,8 @@ header {
   border-radius: 5px;
   margin-right: 5px;
   margin-left: 52px;
-  width: 400px; /* Ajusta el ancho según tu preferencia */
-  margin-top: 30px; /* Ajusta la distancia desde arriba según tu preferencia */
+  width: 400px;
+  margin-top: 30px;
 }
 
 .search-bar .search-btn {
@@ -152,4 +178,50 @@ header {
 
 .search-bar .search-btn i {
   color: #9b0e0e;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #ac1616;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 999;
+  left: auto; /* Elimina la propiedad 'left' */
+  right: 0; /* Alinea el menú desplegable con el borde derecho del elemento padre */
+  top: 100%;
+}
+
+.dropdown-menu li {
+  float: none; /* Asegura que los elementos de la lista estén apilados verticalmente */
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: white;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f7ca00; /* Cambia el color de fondo al pasar el ratón */
+}
+
+.navigation li {
+  position: relative; /* Establece la posición relativa para el elemento padre */
+}
+
+.navigation li:hover .dropdown-menu {
+  display: block; /* Muestra el menú desplegable cuando se pasa el ratón */
+}.notification-badge {
+  position: absolute;
+  top:0;
+  right: 5;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
 }

@@ -26,8 +26,8 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
-
 import { SpinnerComponent } from './spinner/spinner.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -57,7 +57,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatCardModule,
     MatGridListModule,
     MatTabsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatMenuModule
+
   ],
   exports:[
   
@@ -83,7 +85,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FormsModule,
     MatTabsModule,
     MatButtonToggleModule,
-    
+    MatMenuModule
   ]
 })
 export class SharedModule { }

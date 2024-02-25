@@ -11,23 +11,26 @@
       <!-- SIDEBAR -->
       <div class="sidebar">
         <!-- Lista desplegable -->
-        <div class="dropdown">
-          <button class="dropbtn">Cantidad</button>
-          <div class="dropdown-content">
+        <div class="dropdown" *ngIf="!showDropdown">
+          <div class="quantity-container">
+            <button class="dropbtn" (click)="toggleDropdown()">Cantidad</button>
+            <div class="selected-quantity elegant-frame">{{ cantidadSeleccionada }}</div>
+          </div>
+          <div class="dropdown-content" [ngClass]="{'show': showDropdown}">
             <ul class="number-list">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li><a href="javascript:void(0);" (click)="seleccionarCantidad(1)">1</a></li>
+              <li><a href="javascript:void(0);" (click)="seleccionarCantidad(2)">2</a></li>
+              <li><a href="javascript:void(0);" (click)="seleccionarCantidad(3)">3</a></li>
+              <li><a href="javascript:void(0);" (click)="seleccionarCantidad(4)">4</a></li>
+              <li><a href="javascript:void(0);" (click)="seleccionarCantidad(5)">5</a></li>
             </ul>
+            
           </div>
         </div>
-      
         <!-- Botones adicionales -->
         <div class="button-container">
-          <button mat-raised-button color="accent">Comprar</button>
-          <button mat-stroked-button color="accent">Agregar al carrito</button>
+          <button mat-raised-button color="accent" >Comprar</button>
+          <button mat-stroked-button color="accent" (click)="agregarAlCarrito()">Agregar al carrito</button>
         </div>
         <div *ngIf="localNombre">
           Vendido por la tienda: {{ localNombre }}

@@ -115,20 +115,29 @@ namespace Back.Controllers
 
         // ProductoController.cs
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] ProductoDTO productoDto)
+        public async Task<ActionResult<Producto>> CreatePro([FromForm] Producto producto, List<IFormFile> files)
         {
             try
             {
-                var producto = _mapper.Map<Producto>(productoDto);
+                _context.Productos.Add(producto);
+                await _context.SaveChangesAsync(); // Guardar el local primero
 
-                // Aquí puedes manejar la lógica para guardar las imágenes en tu servidor.
-                // Accede a las imágenes a través de productoDto.Imagenes.
-
-                producto = await _productoRepository.AddPro(producto);
-
-                var productoItemDto = _mapper.Map<ProductoDTO>(producto);
-
-                return CreatedAtAction("Get", new { Id = productoItemDto.Id }, productoItemDto);
+                foreach (var file in files)
+                {
+                    using (var stream = new System.IO.MemoryStream())
+                    {
+                        await file.CopyToAsync(stream);
+                        var foto = new Foto
+                        {
+                            NombreFo = file.FileName,
+                            Data = stream.ToArray(),
+                            ProductoId = producto.Id.ToString() // Asignar el LocalId después de guardar el local
+                        };
+                        _context.Fotos.Add(foto);
+                    }
+                }
+                await _context.SaveChangesAsync(); // Guardar las fotos
+                return CreatedAtAction(nameof(Get), new { id = producto.Id }, producto);
             }
             catch (Exception ex)
             {
@@ -210,13 +219,16 @@ namespace Back.Controllers
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<Producto>>> SearchProductos([FromQuery] string searchTerm)
         {
+            searchTerm = searchTerm.ToLower(); // Convertir el término de búsqueda a minúsculas
+
             var productos = await _context.Productos
-                .Where(p => EF.Functions.Like(p.NombrePro, $"%{searchTerm}%") || EF.Functions.Like(p.CategoriaP, $"%{searchTerm}%"))
+                .Where(p => EF.Functions.Like(p.NombrePro.ToLower(), $"%{searchTerm}%")
+                         || EF.Functions.Like(p.CategoriaP.ToLower(), $"%{searchTerm}%")
+                         || EF.Functions.Like(p.NombrePro.ToLower(), $"%{searchTerm}s%")) // Busca también la forma plural
                 .ToListAsync();
 
             return productos;
         }
-
 
     }
 }

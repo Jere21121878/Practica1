@@ -12,8 +12,12 @@ import { AgregarEditarProductoComponent } from './components/store/agregar-edita
 import { AddProdictComponent } from './components/store/add-prodict/add-prodict.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { ComprarProductoComponent } from './components/comprar-producto/comprar-producto.component';
+import { FotoComponent } from './components/foto/foto.component';
+import { CarroComponent } from './components/carro/carro.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
   { path:'home', component: HomeComponent },
 
   { path:'login', component: LoginComponent },
@@ -23,15 +27,19 @@ const routes: Routes = [
 
   
  { path: 'search', component: SearchResultComponent },
+ { path: 'carro', component: CarroComponent },
 
  { path:'comprarPro/:id', component: ComprarProductoComponent },
 
   { path:'store/:Id', component: VerStoreComponent },
   { path:'listPro/:storeId', component: ListProductosComponent },
+  { path:'foto/:storeId', component: FotoComponent },
+
   { path:'verPro/:id', component: VerProductoComponent },
   { path:'editarPro/:Id', component: AgregarEditarProductoComponent },
 
  
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 
 
 

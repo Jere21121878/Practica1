@@ -17,7 +17,7 @@ namespace Back.DTO
         public string VendedorId { get; set; }
 
         //public ICollection<Compra>? Compras { get; set; }
-
+          public FotoDTO Foto { get; set; }
 
 
     }

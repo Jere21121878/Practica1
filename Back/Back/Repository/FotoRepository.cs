@@ -43,6 +43,7 @@ namespace Back.Repository
             {
                 foItem.NombreFo = foto.NombreFo;
 
+                foItem.Data = foto.Data;
 
 
 

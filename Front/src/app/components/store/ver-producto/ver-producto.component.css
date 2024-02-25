@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%; /* Ajusta el ancho según sea necesario */
+}
+
+.product-details {
+    flex: 1;
+    padding-left: 20px; /* Ajuste de padding para separar la información del producto y la imagen */
+}
+
+.product-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Alinea la imagen a la izquierda */
+    align-items: flex-start;
+}
+
+.image-container {
+    border: 1px solid #ccc; /* Añade un borde */
+    border-radius: 5px; /* Redondea las esquinas */
+    padding: 10px; /* Añade un espaciado interno */
+}
+
+img {
+    max-width: 100%; /* Ajusta el tamaño máximo de la imagen al contenedor */
+    max-height: 100%; /* Ajusta la altura máxima de la imagen al contenedor */
+    object-fit: contain; /* Ajusta la imagen dentro del contenedor */
+    border-radius: 5px; /* Redondea las esquinas de la imagen */
+}

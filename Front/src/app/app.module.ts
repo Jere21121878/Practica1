@@ -26,6 +26,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { AddProdictComponent } from './components/store/add-prodict/add-prodict.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { ComprarProductoComponent } from './components/comprar-producto/comprar-producto.component';
+import { FotoComponent } from './components/foto/foto.component';
+import { CarroComponent } from './components/carro/carro.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ComprarProductoComponent } from './components/comprar-producto/comprar-
     AddProdictComponent,
     SearchResultComponent,
     ComprarProductoComponent,
-    
+    FotoComponent,
+    CarroComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,8 @@ import { ComprarProductoComponent } from './components/comprar-producto/comprar-
     ReactiveFormsModule,
     MatIconModule,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

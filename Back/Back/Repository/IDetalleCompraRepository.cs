@@ -9,5 +9,7 @@ namespace Back.Repository
         Task DeleteDC(DetalleCompra detalleCompra);
         Task<DetalleCompra> AddDC(DetalleCompra detalleCompra);
         Task UpdateDC(DetalleCompra detalleCompra);
+        Task<int> GetCantidadDetalleCompraPorUsuario(string userId); // Agregar este método a la interfaz
+
     }
 }

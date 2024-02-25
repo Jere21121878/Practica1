@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Back.DTO;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Back.Models
 {
@@ -6,14 +7,12 @@ namespace Back.Models
     { 
         public int Id { get; set; }
 
-        public int Total { get; set; }
-        public string Fecha { get; set; }
-        [ForeignKey("Comprador")]
-        public int CompradorId { get; set; }
+        public float Total { get; set; }
+        public DateTime Fecha { get; set; }
+        public string CompradorId { get; set; }
 
-        public Comprador Comprador { get; set; }
-
-        //public ICollection<Local> Locals { get; set; }
+        public int LocalId { get; set; }
+        public List<DetalleCompra> Detalles { get; set; }  // Nueva propiedad para detalles de compra
 
 
 

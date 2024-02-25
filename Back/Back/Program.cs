@@ -1,4 +1,5 @@
 using Back.Models;
+using Back.Profiles;
 using Back.Repository;
 using Back.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -61,7 +62,7 @@ builder.Services.AddScoped<IDetalleCompraRepository, DetalleCompraRepository>();
 builder.Services.AddScoped<ICompraRepository, CompraRepository>();
 builder.Services.AddScoped<ILocalRepository, LocalRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-
+builder.Services.AddScoped<IFotoRepository, FotoRepository>();
 
 
 

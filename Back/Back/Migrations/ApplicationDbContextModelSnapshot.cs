@@ -149,19 +149,20 @@ namespace Back.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CompradorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Fecha")
+                    b.Property<string>("CompradorId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Total")
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LocalId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
 
-                    b.HasIndex("CompradorId");
+                    b.HasKey("Id");
 
                     b.ToTable("Compras");
                 });
@@ -194,18 +195,30 @@ namespace Back.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompraId")
+                    b.Property<int?>("CompraId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PrecioXUnidad")
+                    b.Property<string>("CompradorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LocalId")
                         .HasColumnType("int");
+
+                    b.Property<float>("PrecioUnitario")
+                        .HasColumnType("real");
 
                     b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
+                    b.Property<float>("Subtotal")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompraId");
+
+                    b.HasIndex("LocalId");
 
                     b.HasIndex("ProductoId");
 
@@ -311,11 +324,7 @@ namespace Back.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CantidadPro")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CategoriaId")
+                    b.Property<int>("CantidadPro")
                         .HasColumnType("int");
 
                     b.Property<string>("CategoriaP")
@@ -333,19 +342,41 @@ namespace Back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Precio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("PrecioComprado")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Pregunta")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("PrecioVendido")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriaId");
-
                     b.ToTable("Productos");
+                });
+
+            modelBuilder.Entity("Back.Models.ProductoCompra", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompraId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompraId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("ProductosCompras");
                 });
 
             modelBuilder.Entity("Back.Models.Vendedor", b =>
@@ -390,15 +421,15 @@ namespace Back.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "10353f84-6cfb-4bba-a9be-8d321b62e650",
-                            ConcurrencyStamp = "45408d11-4087-4310-b149-40ce66bf1df7",
+                            Id = "97a30f3d-0654-40b4-822e-07e3ed290fd0",
+                            ConcurrencyStamp = "ed3287b4-0989-4503-8588-b05357dc4956",
                             Name = "Vendedor",
                             NormalizedName = "VENDEDOR"
                         },
                         new
                         {
-                            Id = "385527a3-cc5d-44b1-b7a2-3ed5bfea40e5",
-                            ConcurrencyStamp = "0c4f887e-8bd4-4b3b-8fcd-756467098cb6",
+                            Id = "62c223d0-b4f8-4cc5-bf0e-4dba7108f01d",
+                            ConcurrencyStamp = "4bdfc8be-0b19-49d4-ae7a-ad7b959acbdf",
                             Name = "Comprador",
                             NormalizedName = "COMPRADOR"
                         });
@@ -525,22 +556,15 @@ namespace Back.Migrations
                     b.Navigation("Vendedor");
                 });
 
-            modelBuilder.Entity("Back.Models.Compra", b =>
-                {
-                    b.HasOne("Back.Models.Comprador", "Comprador")
-                        .WithMany("Compras")
-                        .HasForeignKey("CompradorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comprador");
-                });
-
             modelBuilder.Entity("Back.Models.DetalleCompra", b =>
                 {
-                    b.HasOne("Back.Models.Compra", "Compra")
+                    b.HasOne("Back.Models.Compra", null)
+                        .WithMany("Detalles")
+                        .HasForeignKey("CompraId");
+
+                    b.HasOne("Back.Models.Local", "Local")
                         .WithMany()
-                        .HasForeignKey("CompraId")
+                        .HasForeignKey("LocalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -550,7 +574,7 @@ namespace Back.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Compra");
+                    b.Navigation("Local");
 
                     b.Navigation("Producto");
                 });
@@ -574,11 +598,23 @@ namespace Back.Migrations
                     b.Navigation("Local");
                 });
 
-            modelBuilder.Entity("Back.Models.Producto", b =>
+            modelBuilder.Entity("Back.Models.ProductoCompra", b =>
                 {
-                    b.HasOne("Back.Models.Categoria", null)
-                        .WithMany("Productos")
-                        .HasForeignKey("CategoriaId");
+                    b.HasOne("Back.Models.Compra", "Compra")
+                        .WithMany()
+                        .HasForeignKey("CompraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Back.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compra");
+
+                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -632,14 +668,9 @@ namespace Back.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Back.Models.Categoria", b =>
+            modelBuilder.Entity("Back.Models.Compra", b =>
                 {
-                    b.Navigation("Productos");
-                });
-
-            modelBuilder.Entity("Back.Models.Comprador", b =>
-                {
-                    b.Navigation("Compras");
+                    b.Navigation("Detalles");
                 });
 #pragma warning restore 612, 618
         }

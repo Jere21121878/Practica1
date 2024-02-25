@@ -1,5 +1,6 @@
 ﻿using Back.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Back.DTO
 {
@@ -9,16 +10,15 @@ namespace Back.DTO
         public string NombrePro { get; set; }
 
         public string DescripcionPro { get; set; }
-        public string Precio { get; set; }
-        public List<IFormFile> Imagenes { get; set; }
+        public float PrecioVendido { get; set; }
+        public float PrecioComprado { get; set; }
 
-        public string CantidadPro { get; set; }
-        public string Pregunta { get; set; }
+
+        public int CantidadPro { get; set; }
         public int LocalId { get; set; }
-
+        public FotoDTO Foto { get; set; }
 
         public string CategoriaP { get; set; }
-
 
     }
 }

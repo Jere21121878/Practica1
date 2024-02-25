@@ -43,10 +43,11 @@ namespace Back.Repository
             {
                 proItem.NombrePro = producto.NombrePro;
                 proItem.DescripcionPro = producto.DescripcionPro;
-                proItem.Precio = producto.Precio;
+                proItem.PrecioVendido = producto.PrecioVendido;
+                proItem.PrecioComprado = producto.PrecioComprado;
+
                 proItem.CantidadPro = producto.CantidadPro;
                 proItem.CategoriaP = producto.CategoriaP;
-                proItem.Pregunta = producto.Pregunta;
 
 
 

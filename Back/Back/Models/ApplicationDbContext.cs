@@ -17,6 +17,7 @@ namespace Back.Models
         public DbSet<Local> Locals { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Foto> Fotos { get; set; }
+        public DbSet<ProductoCompra> ProductosCompras { get; set; }
 
         public DbSet<LocalCompra> LocalCompras { get; set; }
 
@@ -27,6 +28,8 @@ namespace Back.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+         
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
