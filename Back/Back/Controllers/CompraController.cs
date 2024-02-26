@@ -151,7 +151,7 @@ namespace Back.Controllers
                 _context.Compras.Add(compra);
                 await _context.SaveChangesAsync();
 
-                return Ok("Compra realizada con éxito");
+                return Ok(new { message = "Compra realizada con éxito" });
             }
             catch (Exception ex)
             {
@@ -234,5 +234,60 @@ namespace Back.Controllers
             }
 
         }
+        [HttpGet("local/{localId}")]
+        public async Task<ActionResult<IEnumerable<CompraDTO>>> GetComprasByLocalId(int localId)
+        {
+            try
+            {
+                var compras = await _context.Compras
+                    .Include(c => c.Detalles) // Incluir detalles de compra
+                    .Where(c => c.LocalId == localId)
+                    .ToListAsync();
+
+                if (compras == null || compras.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                var comprasDTO = _mapper.Map<IEnumerable<CompraDTO>>(compras);
+
+                return Ok(comprasDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("comprador/{compradorId}")]
+        public async Task<ActionResult<IEnumerable<CompraDTO>>> GetComprasByCompradorId(string compradorId)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(compradorId))
+                {
+                    return BadRequest("El parámetro 'compradorId' es inválido.");
+                }
+
+                var compras = await _context.Compras
+                    .Include(c => c.Detalles) // Incluir detalles de compra
+                    .Where(c => c.CompradorId == compradorId)
+                    .ToListAsync();
+
+                if (compras == null || compras.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                var comprasDTO = _mapper.Map<IEnumerable<CompraDTO>>(compras);
+
+                return Ok(comprasDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

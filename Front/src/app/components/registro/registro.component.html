@@ -1,7 +1,5 @@
-<!-- ============================================ -->
-<!--                   Contact                    -->
-<!-- ============================================ -->
-
+<div class="dash">
+    <app-navbar></app-navbar>
 <section id="contact-1150">
     <div class="cs-container">
         <div class="cs-content">
@@ -16,31 +14,15 @@
                 <img loading="lazy" decoding="async" src="/assets/LogoRegistro1.jpg" alt="people" width="630" height="300">
               </picture>
             <p class="cs-contact-text">
-                A lo largo del mundo existen miles de tiendas ofreciendo sus productos unicos y esenciales, la distancia,el idioma y la 
-                moneda han sido barreras que impedian una transaccion exitosa.Ahora, esos productos, estan a un click de distancia.
+                En todo el mundo, miles de tiendas ofrecen sus productos únicos y esenciales. Sin embargo, barreras como la distancia, el idioma y la moneda han obstaculizado transacciones exitosas. ¡Pero eso ya es cosa del pasado! Ahora, esos productos están al alcance de un simple click.
+
+
+
+
+
             </p>
-            <ul class="cs-ul">
-                <li class="cs-li">
-                    <picture class="cs-icon-wrapper">
-                        <img aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-phone.svg" alt="phone icon" class="cs-icon" width="40" height="40" decoding="async">
-                    </picture>
-                    <div class="cs-flex-group">
-                        <span class="cs-header">Telefono</span>
-                        <a href="tel:888-4565-789
-                        " class="cs-link">+54 9 3518196716
-                        </a>
-                    </div>
-                </li>
-                <li class="cs-li">
-                    <picture class="cs-icon-wrapper">
-                        <img aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-pin.svg" alt="address icon" class="cs-icon" width="40" height="40" decoding="async">
-                    </picture>
-                    <div class="cs-flex-group">
-                        <span class="cs-header">Direccion</span>
-                        <a href="" class="cs-link">Av las malvinas 6000</a>
-                    </div>
-                </li>
-            </ul>
+            <img src="https://static.wixstatic.com/media/3351d4_3faec914214c4ac88ef65fe427cafd81~mv2.gif" alt="gif" width="550" height="380"style="margin-left: 30px;">
+
         </div>
         <!--Form-->
         <form class="cs-form" id="cs-form-1150" name="Contact Form" (ngSubmit)="register()" method="post">
@@ -82,7 +64,11 @@
             </label>
             <label class="cs-label">
                 Voy a...
-                <input class="cs-input" required type="text" id="name-1150" [(ngModel)]="model.rol"name="name" placeholder="Elige si quieres vender o comprar">
+                <select class="cs-input" required id="name-1150" [(ngModel)]="model.rol" name="name">
+                    <option value="" disabled selected>Elige si quieres vender o comprar</option>
+                    <option value="Vendedor">Vender</option>
+                    <option value="Comprador">Comprar</option>
+                </select>
             </label>
             <button class="cs-button-solid cs-submit" type="submit">Registrarse!</button>
         </form>
@@ -92,4 +78,6 @@
         <img class="cs-graphic cs-graphic2" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/coin.svg" alt="bounce" width="205" height="161">
     </div>
 </section>
-                                
+<footer><app-footer></app-footer></footer>
+
+</div>

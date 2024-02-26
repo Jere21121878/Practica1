@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Comprador</title>
-  </head>
-
+<div class="dash">
+  <app-navbar></app-navbar>
   <body>
 
     <div class="dash">
-      <app-navbar></app-navbar>
+    
 
       <!-- HEADER -->
     
@@ -24,35 +18,31 @@
         </div>
 
         <!-- MAIN -->
-      <!-- MAIN -->
-      <main class="main">
-        <div *ngFor="let producto of productos">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image" [style.background-image]="'url(' + producto.foto + ')'"></div>
-              <mat-card-title>
-                <div class="TitlePro">{{ producto.nombrePro}}</div>
-              </mat-card-title>
-              <mat-card-subtitle>{{ producto.precioVendido }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>{{ producto.descripcionPro }}</p>
-            </mat-card-content>
-            <mat-card-content>
-              <p>{{ producto.id }}</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <mat-icon (click)="verProducto(producto)" matTooltip="verProducto" class="search" fontIcon="search"></mat-icon>
-            </mat-card-actions>
-          </mat-card>
-        </div>
+        <main class="main">
+          <div *ngFor="let producto of productos">
+              <div class="example-card">
+                <div class="card-sup">
+
+                  <div class="example-header-image"
+                       *ngIf="producto.id !== undefined"
+                       [style.background-image]="'url(' + fotosPorProducto[producto.id.toString()] + ')'">
+                      </div>
+                      </div>
+                  <div class="card-bottom">
+                      <div class="TitlePro">{{ producto.nombrePro }}</div>
+                      <div class="PricePro">Precio:{{ producto.precioVendido | currency }}</div>
+                      <div class="Tienda">Vendido Por:{{ producto.descripcionPro }}</div>
+
+                      <button (click)="verProducto(producto)">Ver Producto</button>
+                  </div>
+              </div>
+          </div>
       </main>
-
-
       </div>
 
     </div>
 
   </body>
-  
-</html>
+  <footer><app-footer></app-footer></footer>
+
+</div>

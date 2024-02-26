@@ -14,6 +14,11 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { ComprarProductoComponent } from './components/comprar-producto/comprar-producto.component';
 import { FotoComponent } from './components/foto/foto.component';
 import { CarroComponent } from './components/carro/carro.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { SobreComponent } from './components/sobre/sobre.component';
+import { SeguridadComponent } from './components/seguridad/seguridad.component';
+import { FacturaComponent } from './components/factura/factura.component';
+import { TestimoniosComponent } from './components/testimonios/testimonios.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,6 +33,11 @@ const routes: Routes = [
   
  { path: 'search', component: SearchResultComponent },
  { path: 'carro', component: CarroComponent },
+ { path: 'contacto', component: ContactComponent },
+ { path: 'sobre', component: SobreComponent },
+ { path: 'seguridad', component:SeguridadComponent },
+ { path: 'factura', component: FacturaComponent },
+ { path: 'testimonios', component: TestimoniosComponent },
 
  { path:'comprarPro/:id', component: ComprarProductoComponent },
 

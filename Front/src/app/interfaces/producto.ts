@@ -4,7 +4,7 @@ export interface Producto {
     descripcionPro: string;
     localId:number,
     categoriaP: string;
-    cantidadPro: string;
+    cantidadPro: number;
     precioVendido: number;
     precioComprado: number;
 

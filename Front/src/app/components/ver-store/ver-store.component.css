@@ -14,4 +14,40 @@
     box-shadow: 2px 0 12px hsla(270, 30%, 10%, .2);
     transition: width 0.3s ease; /* Agrega una transición para suavizar el cambio de ancho */
   }
-  
+  .card {
+    width: 300px;
+    border-radius: 10px;
+    margin: 50px;
+    background: #f6f2d7;
+    overflow: hidden;
+  }
+  .card-header {
+    height: 70px;
+    border: 2px solid #836602;
+    border-bottom: 2px dotted #836602;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+  }
+  .card-header:before, .card-header:after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 100%;
+    bottom: -12px;
+    border: 2px solid #836602;
+    box-sizing: border-box;
+  }
+  .card-header:before { 
+    left: -13px;
+  }
+  .card-header:after {
+    right: -13px;
+  }
+  .card-body {
+    height: 200px;
+    border: 2px solid #836602;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+  }

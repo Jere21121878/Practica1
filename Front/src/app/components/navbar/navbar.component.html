@@ -19,7 +19,7 @@
         <label for="toggle-btn" class="show-menu-btn"><i class="fas fa-bars"></i></label>
         <ul class="navigation">
             <li><a href="#"><i class="fas fa-house-damage"></i> Home</a></li>
-            <li><a href="#"><i class="far fa-image"></i> Gallery</a></li>
+            <li><a href="seguridad"><i class="fas fa-shield-alt"></i> Seguridad</a></li>
             <li>
                 <a href="carro">
                     <i class="fas fa-shopping-cart"></i> Carro
@@ -34,7 +34,7 @@
                     <li><a href="#" (click)="logout()">Cerrar sesión</a></li>
                 </ul>
             </li>
-            <li *ngIf="!isLoggedIn"><a href="login" class="login-btn"><i class="fas fa-question"></i> Iniciar Sesión</a></li>
+            <li *ngIf="!isLoggedIn"><a href="login" class="login-btn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
         </ul>
         <label for="toggle-btn" class="hide-menu-btn"><i class="fas fa-times"></i></label>
     </header>

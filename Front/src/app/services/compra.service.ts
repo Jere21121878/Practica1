@@ -28,4 +28,14 @@ export class CompraService {
   ejecutarCompra(compra: Compra): Observable<void> {
     return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}compra`, compra);
   }
+
+  getComprasByLocalId(localId: string): Observable<Compra[]> {
+    console.log('URL:', `${this.myAppUrl}${this.myApiUrl}local/${localId}`);
+    return this.http.get<Compra[]>(`${this.myAppUrl}${this.myApiUrl}local/${localId}`);
+  }
+  getComprasByCompradorId(localId: string): Observable<Compra[]> {
+    console.log('URL:', `${this.myAppUrl}${this.myApiUrl}local/${localId}`);
+    return this.http.get<Compra[]>(`${this.myAppUrl}${this.myApiUrl}local/${localId}`);
+  }
+
 }

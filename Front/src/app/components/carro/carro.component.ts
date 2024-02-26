@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FotoService } from 'src/app/services/foto.service';
 import { Foto } from 'src/app/interfaces/foto';
 import { Compra } from 'src/app/interfaces/compra';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-carro',
@@ -30,7 +31,7 @@ export class CarroComponent implements OnInit, AfterViewInit {
     private authService: AuthenticationService,
     private fotoService: FotoService,
     private compraService: CompraService,
-
+    private productoService: ProductoService,
   ) {}
 
   ngOnInit(): void {
@@ -96,7 +97,6 @@ export class CarroComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {}
-
   ejecutarCompra() {
     const detallesCompra = this.dataSource.data;
     const comprasPorLocalId: { [key: number]: DetalleCompra[] } = {};
@@ -115,14 +115,36 @@ export class CarroComponent implements OnInit, AfterViewInit {
         total: detallesPorLocal.reduce((total, detalle) => total + detalle.subtotal, 0),
         fecha: new Date(),
         localId: localId,
-        compradorId: this.compradorId, // Verifica que este valor sea el correcto
+        compradorId: this.compradorId,
         detalles: detallesPorLocal
       };
   
-      console.log('compradorId:', compra.compradorId); // Añade esta línea para depurar el valor de compradorId
-  
       // Realizar la solicitud POST para ejecutar la compra
       this.compraService.ejecutarCompra(compra).subscribe(() => {
+        // Una vez que la compra se haya ejecutado con éxito, eliminar los detalles de compra
+        detallesPorLocal.forEach(detalle => {
+          if (detalle.id !== undefined) { // Verificar si el id es definido antes de llamar a eliminarDetalle()
+            this.eliminarDetalle(detalle.id);
+  
+            // Restar la cantidad de detalleCompra a la cantidadPro del Producto
+            this.productoService.getProducto(+detalle.productoId).subscribe(producto => {
+              if (producto.id !== undefined) {
+                producto.cantidadPro -= detalle.cantidad;
+                this.productoService.updateProducto(producto.id, producto).subscribe(() => {
+                  console.log('Cantidad actualizada para el producto:', producto.nombrePro);
+                }, error => {
+                  console.error('Error al actualizar la cantidad del producto:', error);
+                });
+              } else {
+                console.error('El producto no tiene un ID definido.');
+              }
+            }, error => {
+              console.error('Error al obtener el producto:', error);
+            });
+          }
+        });
+        // Recargar la página después de eliminar los detalles de compra
+        window.location.reload();
         // Manejar la respuesta o realizar alguna lógica adicional
         // En este ejemplo, simplemente mostramos un mensaje de éxito
         this.mostrarMensajeExito();
@@ -132,7 +154,6 @@ export class CarroComponent implements OnInit, AfterViewInit {
       });
     });
   }
-
 
 
   mostrarMensajeExito() {

@@ -44,7 +44,7 @@
     #contact-1150 .cs-picture {
         width: 100%;
         /* 240px - 300px */
-        height: clamp(15rem, 35vw, 18.75rem);
+        height: 50%;
         margin: 0 0 1.5rem;
         border-radius: 22.5rem;
         /* clips image corners */
@@ -131,7 +131,7 @@
         padding: clamp(1.5rem, 5.18vw, 3rem) clamp(1rem, 4vw, 2rem);
         /* prevents flexbox from affecting height and width */
         box-sizing: border-box;
-        background-color: #fff;
+        background-color: #ee8181;
         border-radius: 1rem;
         display: flex;
         justify-content: space-between;
@@ -200,7 +200,7 @@
         position: absolute;
         height: 100%;
         width: 0%;
-        background: #000;
+        background: #2da106;
         opacity: 1;
         top: 0;
         left: 0;
@@ -267,4 +267,7 @@
     }
 }
 
-                                
+.dash {
+    display: flex; /* Hacer que los elementos hijos se comporten como flexbox */
+    flex-direction: column; /* Apilar los elementos verticalmente */
+  }                            

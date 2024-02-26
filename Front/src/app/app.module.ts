@@ -28,6 +28,11 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { ComprarProductoComponent } from './components/comprar-producto/comprar-producto.component';
 import { FotoComponent } from './components/foto/foto.component';
 import { CarroComponent } from './components/carro/carro.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { SobreComponent } from './components/sobre/sobre.component';
+import { SeguridadComponent } from './components/seguridad/seguridad.component';
+import { FacturaComponent } from './components/factura/factura.component';
+import { TestimoniosComponent } from './components/testimonios/testimonios.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,12 @@ import { CarroComponent } from './components/carro/carro.component';
     ComprarProductoComponent,
     FotoComponent,
     CarroComponent,
-    NavbarComponent
+    NavbarComponent,
+    ContactComponent,
+    SobreComponent,
+    SeguridadComponent,
+    FacturaComponent,
+    TestimoniosComponent
   ],
   imports: [
     BrowserModule,

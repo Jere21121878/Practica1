@@ -1,98 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap');
 
-
-
 html {
-  font-size: 62.5%;
+    font-size: 62.5%;
 }
 
 body {
-  place-content: center;
-  color: hsl(260, 100%, 99%);
-  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
+    place-content: center;
+    color: hsl(260, 100%, 99%);
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 button {
-  font-size: inherit;
-  font-family: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-button:hover,
-button:focus {
-  outline: none;
+button:hover {
+    background-color: #45a049;
 }
 
 a,
 a:hover,
 a:focus {
-  outline: none;
-  text-decoration: none;
+    outline: none;
+    text-decoration: none;
 }
 
 .dash {
-  background: hsl(260, 100%, 99%);
-  display: flex;
-  flex-direction: column;
-
+    background: hsl(260, 100%, 99%);
+    display: flex;
+    flex-direction: column;
 }
 
 .dash * {
-  transition: all .1s;
+    transition: all .1s;
 }
 
-
-
-
 .body {
-  flex-grow: 2;
-  display: flex;
+    flex-grow: 2;
+    display: flex;
 }
 
 .sidebar {
-  width: 8rem;
-  background-color: rgb(260, 100%, 99%);
+    width: 8rem;
+    background-color: rgb(260, 100%, 99%);
 }
-
-
-
-
 
 .main {
-  flex-grow: 2;
-background-color: aliceblue;
-  padding: 4rem 0 0 8rem;
-  display: flex;
-  border-bottom-right-radius: 8px;
-  justify-content: space-around;
-  flex-wrap: wrap;
-
+    flex-grow: 2;
+    background-color: aliceblue;
+    padding: 4rem 0 0 8rem;
+    display: flex;
+    border-bottom-right-radius: 8px;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
-
-.main__col-1 {
-  width: 30%;
-}
-
-
-
-
-
 
 .example-card {
-  max-width: 400px;
+  width: 300px;
   margin: 15px;
   box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex; /* añadido */
+  flex-direction: column;
+  align-items: center; /* añadido */
+}
+.example-header-image {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 230px; /* Modifica este valor según sea necesario */
+  width: 230px; /* Modifica este valor según sea necesario */
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
 }
 
-.example-header-image {
-  background-image: url('/assets/cat.jpg'); /* Puedes establecer una imagen por defecto para los productos */
-  background-size: cover;
-  height: 100px; /* Ajusta la altura según tus necesidades */
-  width: 100px; /* Ajusta el ancho según tus necesidades */
-  border-radius: 50%;
+
+.card-bottom {
+    padding: 1rem;
 }
-.example-card .example-header-image .TitlePro,
-.example-card mat-card-title .TitlePro {
-  color: #000; /* Cambia a color negro (#000) */
+
+.TitlePro {
+    color: #000;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
 }
+
+.Tienda {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: black;
+
+}
+
+.PricePro {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: black;
+}
+.dash {
+    display: flex; /* Hacer que los elementos hijos se comporten como flexbox */
+    flex-direction: column; /* Apilar los elementos verticalmente */
+  }                            
